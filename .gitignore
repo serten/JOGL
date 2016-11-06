@@ -3,4 +3,4 @@
 .metadata
 .recommenders
 JOGL_EXAMPLE/.*
-
+bin/
