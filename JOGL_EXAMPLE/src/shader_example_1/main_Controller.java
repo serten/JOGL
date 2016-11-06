@@ -104,7 +104,7 @@ public class main_Controller {
             		//gl2.glEnable(GL3.GL_POINT_SIZE); 
             		//gl2.glEnable(GL3.GL_LINE_WIDTH);
             		gl2.glLineWidth(15.0f);  //==> used with GL_LINES
-            		//gl2.glEnable(GL3.GL_LINE_SMOOTH);
+            		gl2.glEnable(GL3.GL_LINE_SMOOTH);
             		
             		if(gl2.glIsEnabled(	GL3.GL_PROGRAM_POINT_SIZE))
             		{
