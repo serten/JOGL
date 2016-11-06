@@ -35,6 +35,8 @@ public class main_Controller {
     
     private static GL2 gl2;
     
+    private static String PATH = "/Users/suleymanerten/Documents/workspace/GITHUB/JOGL/JOGL_EXAMPLE/src/shader_example_1/";
+    
     
     public static void main( String [] args ) {
 
@@ -183,15 +185,20 @@ public class main_Controller {
 
     	*/
 
-    	long mainVert=Bin.createVertShader(gl2, "/Users/suleymanerten/workspace/JOGL_EXAMPLE/src/shader_example_1/v.txt");
+    	long mainVert=Bin.createVertShader(gl2, PATH+"v.txt");
 
-    	long mainFrag=Bin.createFragShader(gl2, "/Users/suleymanerten/workspace/JOGL_EXAMPLE/src/shader_example_1/f.txt");
+    	long mainFrag=Bin.createFragShader(gl2, PATH+"f.txt");
 
+    	//long mainGeom=Bin.createGeomShader(gl2, PATH+"g.txt"); //MAC doesnt support OPENGL 3.2
+
+    	
     	System.out.println(mainVert);
 
     	//attach the shaders to the shader program and link
 
     	gl2.glAttachObjectARB(shader, mainVert);
+    	
+    	//gl2.glAttachObjectARB(shader, mainGeom); //MAC doesnt support OPENGL 3.2
 
     	gl2.glAttachObjectARB(shader, mainFrag);
 

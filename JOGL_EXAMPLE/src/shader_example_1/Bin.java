@@ -9,6 +9,7 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL3;
 
 
 public class Bin {
@@ -86,43 +87,91 @@ public class Bin {
 
 	public static long createFragShader(GL2 gl, String filename){
 
-	long fragShader=gl.glCreateShaderObjectARB(gl.GL_FRAGMENT_SHADER);
-
-	if(fragShader==0) return 0;
-
-	String[] fragCode=new String[1];
-
-	fragCode[0]="";
-
-	String line;
-
-	try{
-
-	BufferedReader reader=new BufferedReader(new FileReader(filename));
-
-	while((line=reader.readLine())!=null){
-
-	fragCode[0] += line + "\n";
-
-	}
-
-	}catch(Exception e){
-
-	System.out.println("Fail reading vert shader");
-
-	}
-
-	gl.glShaderSourceARB(fragShader, 1, fragCode, null);
-
-	gl.glCompileShaderARB(fragShader);
-
+		long fragShader=gl.glCreateShaderObjectARB(gl.GL_FRAGMENT_SHADER);
 	
-	if(printLogInfo(gl, fragShader))
-	{
-		fragShader=0;
-		System.out.println("FRAGSHADER notcompiled\n ----------------- \n");
+		if(fragShader==0) return 0;
+	
+		String[] fragCode=new String[1];
+	
+		fragCode[0]="";
+	
+		String line;
+	
+		try{
+	
+			BufferedReader reader=new BufferedReader(new FileReader(filename));
+		
+			while((line=reader.readLine())!=null){
+		
+			fragCode[0] += line + "\n";
+	
+		}
+	
+		}catch(Exception e){
+	
+			System.out.println("Fail reading frag shader");
+	
+		}
+	
+		gl.glShaderSourceARB(fragShader, 1, fragCode, null);
+	
+		gl.glCompileShaderARB(fragShader);
+	
+		
+		if(printLogInfo(gl, fragShader))
+		{
+			fragShader=0;
+			System.out.println("FRAGSHADER notcompiled\n ----------------- \n");
+		}
+		return fragShader;
+
 	}
-	return fragShader;
+	
+	/*
+
+	* Essentially the same as the vertex shader
+
+	*/
+
+	public static long createGeomShader(GL2 gl, String filename){
+
+		long geomShader=gl.glCreateShaderObjectARB(GL3.GL_GEOMETRY_SHADER);
+	
+		if(geomShader==0) return 0;
+	
+		String[] geomCode=new String[1];
+	
+		geomCode[0]="";
+	
+		String line;
+	
+		try{
+	
+			BufferedReader reader=new BufferedReader(new FileReader(filename));
+		
+			while((line=reader.readLine())!=null){
+		
+			geomCode[0] += line + "\n";
+	
+		}
+	
+		}catch(Exception e){
+	
+			System.out.println("Fail reading geom shader");
+	
+		}
+	
+		gl.glShaderSourceARB(geomShader, 1, geomCode, null);
+	
+		gl.glCompileShaderARB(geomShader);
+	
+		
+		if(printLogInfo(gl, geomShader))
+		{
+			geomShader=0;
+			System.out.println("GEOMSHADER notcompiled\n ----------------- \n");
+		}
+		return geomShader;
 
 	}
 
