@@ -1,0 +1,6 @@
+*.class
+*.jar
+.metadata
+.recommenders
+JOGL_EXAMPLE/.*
+
