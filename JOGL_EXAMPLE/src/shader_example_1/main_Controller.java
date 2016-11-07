@@ -124,9 +124,7 @@ public class main_Controller {
             		
             		gl2.glUseProgramObjectARB(shader);
             		
-            		
-            		
-            		gl2.glDrawArrays(GL2.GL_LINES, 0, 4);
+            		gl2.glDrawArrays(GL2.GL_TRIANGLE_STRIP, 0, 4);
 
                 	gl2.glUseProgramObjectARB(0);
         		}
