@@ -1,0 +1,18 @@
+/* Very simple fragment shader. It basically passes the
+ * (interpolated) vertex color on to the individual pixels.
+ */ 
+#version 120
+ 
+// corresponds with output from vertex shader
+
+
+varying vec2 textureCoordV;
+uniform sampler2D myTexture;  
+void main()
+{
+	// assign vertex color to pixel color
+    //gl_FragColor = vec4(textureCoordV.x, textureCoordV.y, 0.0, 1.0);
+    vec4 renk = texture2D(myTexture, textureCoordV); 
+	gl_FragColor =  renk;
+
+}

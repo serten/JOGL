@@ -1,0 +1,18 @@
+/* Very simple vertex shader that applies the model view
+ * and projection matrix to the given vertex and overrides
+ * the color with a constant for all vertices. 
+ */
+#version 120
+
+attribute vec4 position;
+attribute vec2 textureCoord;
+ 
+varying vec2 textureCoordV; 
+void main()
+{
+
+	gl_PointSize = 40.0f;
+    gl_Position = position;
+    textureCoordV = textureCoord;
+    
+}
