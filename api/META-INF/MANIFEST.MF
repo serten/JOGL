@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Api
+Bundle-SymbolicName: api
+Bundle-Version: 1.0.0.v1
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: api,
+ impl
+Bundle-ActivationPolicy: lazy
