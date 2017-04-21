@@ -4,7 +4,8 @@ Bundle-Name: Impl
 Bundle-SymbolicName: impl
 Bundle-Version: 1.0.0.v1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: impl,
+Import-Package: api,
+ impl,
  org.osgi.framework;version="1.8.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: impl.impl.Activator

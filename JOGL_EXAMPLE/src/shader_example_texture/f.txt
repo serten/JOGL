@@ -7,12 +7,28 @@
 
 
 varying vec2 textureCoordV;
-uniform sampler2D myTexture;  
+uniform sampler2D myTexture;
+uniform float width;
+uniform float height;  
 void main()
 {
 	// assign vertex color to pixel color
     //gl_FragColor = vec4(textureCoordV.x, textureCoordV.y, 0.0, 1.0);
-    vec4 renk = texture2D(myTexture, textureCoordV); 
-	gl_FragColor =  renk;
+    float horStep = 1 / width;
+    float verStep = 1 / height;
+    /*vec4 color = 	0.025 * texture2D(myTexture, vec2 (textureCoordV.x-horStep, textureCoordV.y-verStep) ) +
+    				0.1 * texture2D(myTexture, vec2 (textureCoordV.x-horStep, textureCoordV.y) ) +
+    				0.025 * texture2D(myTexture, vec2 (textureCoordV.x-horStep, textureCoordV.y+verStep) ) +
+    				0.1 * texture2D(myTexture, vec2 (textureCoordV.x, textureCoordV.y-verStep) ) +
+    				0.4 * texture2D(myTexture, vec2 (textureCoordV.x, textureCoordV.y) ) +
+    				0.1 * texture2D(myTexture, vec2 (textureCoordV.x, textureCoordV.y+verStep) ) +
+    				0.025 * texture2D(myTexture, vec2 (textureCoordV.x+horStep, textureCoordV.y-verStep) ) +
+    				0.1 * texture2D(myTexture, vec2 (textureCoordV.x+horStep, textureCoordV.y) ) +
+    				0.025 * texture2D(myTexture, vec2 (textureCoordV.x+horStep, textureCoordV.y+verStep) ) ;*/
+    				
+    vec4 color = texture2D(myTexture, textureCoordV );				
+    				
+     
+	gl_FragColor = color;
 
 }

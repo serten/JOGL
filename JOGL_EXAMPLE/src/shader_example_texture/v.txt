@@ -8,11 +8,13 @@ attribute vec4 position;
 attribute vec2 textureCoord;
  
 varying vec2 textureCoordV; 
+uniform float scale;
 void main()
 {
-
-	gl_PointSize = 40.0f;
-    gl_Position = position;
+	
+	//gl_PointSize = 40.0f;
+	vec4 newpos = vec4 ((position.x*scale)-1.0f,(position.y*scale)-1.0f,position.z, 1.0f);
+    gl_Position = newpos;
     textureCoordV = textureCoord;
     
 }

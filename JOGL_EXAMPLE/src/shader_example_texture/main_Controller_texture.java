@@ -13,6 +13,8 @@ import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureIO;
 
 import java.awt.Frame;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -38,7 +40,7 @@ public class main_Controller_texture {
     
     private static GL2 gl2;
     private static String PATH = "/Users/suleymanerten/Documents/workspace/GITHUB/JOGL/JOGL_EXAMPLE/src/shader_example_texture/";
-    
+    static float scale = 1.0f;
     
     public static void main( String [] args ) {
 
@@ -48,18 +50,52 @@ public class main_Controller_texture {
         GLCapabilities glcapabilities = new GLCapabilities( glprofile );
         final GLCanvas glcanvas = new GLCanvas( glcapabilities );
        
-       
+        glcanvas.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				scale = scale - 0.1f;
+				//System.out.println("scale decreased" + scale);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
         glcanvas.addGLEventListener( new GLEventListener() {
         	 Texture mTest = null;
              float vertices[] = {	
+            		0.0f, 0.5f, .0f, 1.0f,
              		0.0f, 0.0f, .0f, 1.0f,  
-         			0.0f, 0.5f, .0f, 1.0f,
+         			0.5f, 0.5f, .0f, 1.0f,
          			0.5f, 0.0f, .0f, 1.0f};
              float textureCoord[] = {	
-              		1.0f, 0.0f,   
-          			1.0f, 1.0f, 
-          			0.0f, 1.0f};
+              		0.0f, 1.0f,   
+          			0.0f, 0.0f, 
+          			1.0f, 1.0f,
+          			1.0f, 0.0f};
              
             @Override
             public void reshape( GLAutoDrawable glautodrawable, int x, int y, int width, int height ) {
@@ -84,7 +120,7 @@ public class main_Controller_texture {
             public void display( GLAutoDrawable glautodrawable ) {
                 //System.out.println("display called");
 
-            	
+            	int scaleloc = 0;
             	if(!initialize)
             	{
             		initialize = true;
@@ -98,6 +134,13 @@ public class main_Controller_texture {
             		System.out.println("textureloc:"+textureloc);
             		int sampleloc = gl2.glGetUniformLocation(shader, "myTexture"); 
             		System.out.println("sampleloc:"+sampleloc);
+            		int widthloc =  gl2.glGetUniformLocation(shader, "width"); 
+            		System.out.println("widthloc:"+widthloc);
+            		int heightloc =  gl2.glGetUniformLocation(shader, "height"); 
+            		System.out.println("heightloc:"+heightloc);
+            		scaleloc =  gl2.glGetUniformLocation(shader, "scale"); 
+            		System.out.println("scaleloc:"+scaleloc);
+            		
             		
             		gl2.glBindBuffer(GL2.GL_ARRAY_BUFFER, idArray[0]);
             		gl2.glBufferData(GL2.GL_ARRAY_BUFFER, vertices.length * Float.SIZE / 8,
@@ -112,7 +155,10 @@ public class main_Controller_texture {
             		gl2.glVertexAttribPointer(textureloc, 2, GL2.GL_FLOAT, false, 0, 0);
             		
             		try {
-						mTest = TextureIO.newTexture(new File(PATH+"textureSample.png"),true);
+						mTest = TextureIO.newTexture(new File(PATH+"nature31.jpg"),true);
+						gl2.glUniform1f(widthloc, (float) mTest.getWidth());
+						gl2.glUniform1f(heightloc, (float) mTest.getHeight());
+						
 					} catch (GLException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -122,7 +168,10 @@ public class main_Controller_texture {
             		gl2.glGenTextures(1, texar, 0);
             		gl2.glBindTexture(GL2.GL_TEXTURE_2D,texar[0]); 
             		mTest.enable(gl2);
-            		mTest.bind(gl2); 
+            		mTest.bind(gl2);
+            		gl2.glTexParameteri(gl2.GL_TEXTURE_2D, gl2.GL_TEXTURE_MAG_FILTER, gl2.GL_LINEAR);
+            		gl2.glTexParameteri(gl2.GL_TEXTURE_2D, gl2.GL_TEXTURE_MIN_FILTER, gl2.GL_NEAREST);
+            		//gl2.glGenerateMipmap(gl2.GL_TEXTURE_2D);
             	}
             	
             	if(useShader) 
@@ -130,11 +179,14 @@ public class main_Controller_texture {
             		
             		gl2.glUseProgramObjectARB(shader);
             		
+            			
+            			gl2.glUniform1f(scaleloc, scale);
+            			System.out.println(scale);
 	            		gl2.glActiveTexture(GL2.GL_TEXTURE0);
 	            		mTest.enable(gl2);
 	            		mTest.bind(gl2); 
 	            		
-	            		gl2.glDrawArrays(GL2.GL_TRIANGLE_STRIP, 0, 3);
+	            		gl2.glDrawArrays(GL2.GL_TRIANGLE_STRIP, 0, 4 );
 	            		
 	            		mTest.disable(gl2);
 
@@ -159,7 +211,7 @@ public class main_Controller_texture {
 
         
 
-        frame.setSize( 640, 480 );
+        frame.setSize( 1000, 1000 );
         frame.setVisible( true );
         widthh = frame.getWidth();
         heightt =  frame.getHeight();
