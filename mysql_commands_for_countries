@@ -1,0 +1,22 @@
+CREATE INDEX countryPolygon_index ON countries (countryPolygon);
+
+CREATE TABLE `countries_db`.`countries` (
+  `idCountry` INT NOT NULL AUTO_INCREMENT,
+  `countryName` VARCHAR(45) NULL,
+  `countryPolygon` GEOMETRY NULL,
+  SPATIAL KEY `idx_countryPolygon`  (`countryPolygon`),
+  PRIMARY KEY (`idCountry`),
+  UNIQUE INDEX `idCountry_UNIQUE` (`idCountry` ASC));
+
+sudo apt-get install php5-mysqlnd
+service apache2 restart
+
+ini_set('display_errors', 1);
+
+if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {
+    echo 'We don\'t have mysqli!!!';
+} else {
+    echo 'Phew we have it!';
+}
+
+INSERT INTO countries (countryPolygon) VALUES(GeomFromText('POINT(1 1)'));

@@ -1,0 +1,41 @@
+1. sudo yum install mysql mysql-server                 --> installs mysql to server
+2. sudo chkconfig --levels 235 mysqld on               --> sets up mysql configuration
+3. sudo service mysqld start                           --> starts db service for server
+4. mysql -u root -p                                    --> starts mysql shell
+5. CREATE DATABASE databasename;     
+   USE databasename;
+   DROP TABLE IF EXITS users;
+   CREATE TABLE users(
+	keyID integer PRIMARY KEY auto_increment,
+	username varchar(50),
+        password varchar(50)
+   );
+                
+6. CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'myuser';
+   GRANT SELECT ON *.* to 'myuser'@'localhost'; 
+   GRANT UPDATE ON *.* TO 'myuser'@'localhost' IDENTIFIED BY 'myuser';
+   GRANT ALTER ON *.* TO 'myuser'@'localhost' IDENTIFIED BY 'myuser';
+
+   SET @count = 0;
+   UPDATE `users` SET `users`.`id` = @count:= @count + 1;
+
+7. INSERT INTO users VALUES (1,'suleyman','erten');
+
+8. http://54.187.253.246/selectuser/select.php
+
+9. ssh -i "webgl.pem" ec2-user@54.187.253.246
+
+10. uname -a     gives operatin system infoe
+
+11. PROMPT>sqlplus 'oracle@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracleinstantce.ctnfr2pmdvmf.us-west-2.rds.amazonaws.com>)
+    (PORT=1521))(CONNECT_DATA=(SID=ORCL>)))',
+
+12. netstat -ntlp | grep LISTEN   //check ports
+
+13. ssh -fNg -L 5555:localhost:5432 -i "wash_project_key_pair.pem"  ec2-user@54.213.69.227 // port forwarding
+
+14. setsid
+
+15. ps all    -->   kill -p "PID"
+
+

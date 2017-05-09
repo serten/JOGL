@@ -1,0 +1,26 @@
+$ sudo apt-get install postgresql-9.4
+
+$ sudo -u postgres psql postgres //first 
+
+# \password postgres  //then connect it via pgadmin,  host 127.0.0.1,   port 5433
+
+
+postgis:
+
+# sudo apt-get install -y postgis postgresql-9.*-postgis-2.1
+
+# CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;
+
+# select postgis_full_version();
+
+# select version();
+
+
+postgre - php - ubuntu:
+
+$ sudo apt-get install php5-pgsql
+
+$ sudo service apache2 restrart
+
+
+

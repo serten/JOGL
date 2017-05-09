@@ -1,0 +1,28 @@
+1. wget http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol7
+
+2. gpg --quiet --with-fingerprint ./RPM-GPG-KEY-oracle-0l7
+
+3. rpm --import ./RPM-GPG-KEY-oracle-ol7
+
+4. sudo yum -y install php56-pgsql
+
+5. sudo service httpd restart
+
+6. php -r 'echo phpinfo();'
+
+
+
+
+sudo -i
+
+var/lib/pgsql92/data/pg_hba.conf
+
+host    all         all         127.0.0.1/32          trust
+or
+
+local   all         all                               trust
+
+service postgresql92 restart
+
+
+

@@ -1,0 +1,17 @@
+1. sudo yum install postgresql
+
+2. sudo yum install postgresql-server
+
+3. sudo service postgresql initdb
+
+4. sudo service postgresql start
+
+5. sudo -u postgres psql postgres
+
+6. sudo yum install httpd  //apache server
+
+8. sudo yum install php
+
+9. suod yum install php-pgsql
+
+7. sudo service httpd start
